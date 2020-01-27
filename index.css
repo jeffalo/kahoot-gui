@@ -1,20 +1,20 @@
-.console{
+.console {
   transition: 0.0.1s;
   background-color: #f7f7f7;
   width: 95%;
 }
-body 
-{
-	padding: 100px;
+
+body {
+  padding: 100px;
 }
 
-.container-after-titlebar{
-	left: 10px !important;
-	right: 10px !important;
+.container-after-titlebar {
+  left: 10px !important;
+  right: 10px !important;
 }
 
 .btn {
-  background-color: #7E48BD; 
+  background-color: #7E48BD;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -25,14 +25,18 @@ body
   transition: 0.0.1s;
 }
 
-.btn:hover {opacity: 0.8}
-.btn:active {
-	opacity: 1;
-	background-color: #a37cd0;
+.btn:hover {
+  opacity: 0.8
 }
+
+.btn:active {
+  opacity: 1;
+  background-color: #a37cd0;
+}
+
 .btn:focus {
-outline: none;
-border: none;
+  outline: none;
+  border: none;
 }
 
 
@@ -41,6 +45,7 @@ border: none;
   position: relative;
   width: 300px;
 }
+
 input {
   background: transparent;
   border: none;
@@ -48,19 +53,21 @@ input {
   padding: 20px 2px 5px;
   transition: padding 0.4s;
   width: 80%;
-  
 }
-input:placeholder-shown + label {
+
+input:placeholder-shown+label {
   color: #aaa;
   font-size: 14px;
   top: 15px;
 }
-input:focus + label,
 
-input::placeholder{
+input:focus+label,
+
+input::placeholder {
   color: transparent;
-  display:none;
+  display: none;
 }
+
 input:focus,
 input:not(:placeholder-shown) {
   border-bottom: solid 1px #4476bd;
@@ -79,21 +86,25 @@ input::-webkit-inner-spin-button {
   overflow: hidden;
   /* This container should not have padding, borders, etc. */
 }
+
 .visible {
   visibility: visible;
   opacity: 1;
   transition: opacity 0.1s linear;
 }
+
 .hidden {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s 0.1s, opacity 0.1s linear;
 }
-.visible > div,
-.hidden > div {
+
+.visible>div,
+.hidden>div {
   /* Put any padding, border, min-height, etc. here. */
 }
-.hidden > div {
+
+.hidden>div {
   margin-top: -10000px;
   transition: margin-top 0s 0.1s;
 }
@@ -135,6 +146,11 @@ input::-webkit-inner-spin-button {
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
 }
