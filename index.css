@@ -1,0 +1,140 @@
+.console{
+  transition: 0.0.1s;
+  background-color: #f7f7f7;
+  width: 95%;
+}
+body 
+{
+	padding: 100px;
+}
+
+.container-after-titlebar{
+	left: 10px !important;
+	right: 10px !important;
+}
+
+.btn {
+  background-color: #7E48BD; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: 0.0.1s;
+}
+
+.btn:hover {opacity: 0.8}
+.btn:active {
+	opacity: 1;
+	background-color: #a37cd0;
+}
+.btn:focus {
+outline: none;
+border: none;
+}
+
+
+.input {
+  margin: 10px 0;
+  position: relative;
+  width: 300px;
+}
+input {
+  background: transparent;
+  border: none;
+  border-bottom: solid 1px #ccc;
+  padding: 20px 2px 5px;
+  transition: padding 0.4s;
+  width: 80%;
+  
+}
+input:placeholder-shown + label {
+  color: #aaa;
+  font-size: 14px;
+  top: 15px;
+}
+input:focus + label,
+
+input::placeholder{
+  color: transparent;
+  display:none;
+}
+input:focus,
+input:not(:placeholder-shown) {
+  border-bottom: solid 1px #4476bd;
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.visible,
+.hidden {
+  overflow: hidden;
+  /* This container should not have padding, borders, etc. */
+}
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.1s linear;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.1s, opacity 0.1s linear;
+}
+.visible > div,
+.hidden > div {
+  /* Put any padding, border, min-height, etc. here. */
+}
+.hidden > div {
+  margin-top: -10000px;
+  transition: margin-top 0s 0.1s;
+}
+
+
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 30px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

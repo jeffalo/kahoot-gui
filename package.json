@@ -1,0 +1,15 @@
+{
+  "name": "kahoot-gui",
+  "version": "0.1.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^7.1.10"
+  },
+  "dependencies": {
+    "custom-electron-titlebar": "^3.2.1",
+    "kahoot.js-updated": "^1.2.0"
+  }
+}
