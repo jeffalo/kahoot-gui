@@ -37,6 +37,13 @@ function toggleShow() {
   }
 }
 
+async function leave(){
+  for (client in clients) {
+    await clients[client].leave()
+  }
+}
+
+document.getElementById("leave").addEventListener("click", leave);
 document.getElementById("stop").addEventListener("click", stop);
 document.getElementById("open-nav").addEventListener("click", openNav);
 document.getElementById("close-nav").addEventListener("click", closeNav);
