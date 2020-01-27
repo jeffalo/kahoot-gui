@@ -79,37 +79,37 @@ function timer(pin, name, amountb, sped) {
 }
 
 function joinKahoot(pin, name) {
-  //num++;
-  clients[n] = new Kahoot;
-  clients[n].setMaxListeners(Number.POSITIVE_INFINITY);
-  clients[n].join(pin /* Or any other kahoot game pin */ , name + variable);
-  clients[n].on("joined", () => {
+  const client = new Kahoot;
+  client.setMaxListeners(Number.POSITIVE_INFINITY);
+  client.join(pin /* Or any other kahoot game pin */ , name + variable);
+  client.on("joined", () => {
     //status("Bot ("+name+" "+variable+") joined.");
   });
   var myID = variable;
-  clients[n].on("quizStart", Quiz => {
+  client.on("quizStart", Quiz => {
     status("[" + name + myID + "] Quiz has started!");
     quizName.innerHTML = Quiz.name;
     questionAmount.innerHTML = Quiz.questionCount + " questions";
     currentQuestionWork.innerHTML = 'no questions yet';
-    botAmount.innterHTML = n;
   });
-  clients[n].on("questionStart", question => {
+  client.on("questionStart", question => {
     var answ = Math.floor(Math.random() * Math.floor(4));
     status("[" + name + myID + "] answering opt" + answ);
     question.answer(answ);
   });
 
-  clients[n].on("question", currentQuestion => {
+  client.on("question", currentQuestion => {
     currentQuestionWork.innerHTML = "question#" + currentQuestion.number;
   });
-  clients[n].on("questionEnd", question => {
+  client.on("questionEnd", question => {
     status("[" + name + myID + "] correct?=" + question.correct);
   });
-  clients[n].on("quizEnd", () => {
+  client.on("quizEnd", () => {
     status("[" + name + myID + "] quiz ended");
   });
-  clients[n].on("disconnect", () => {
+  client.on("disconnect", () => {
     status("[" + name + myID + "] disconnected");
   });
+
+  clients.push(client);
 }
