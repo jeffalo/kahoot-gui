@@ -43,6 +43,12 @@ async function leave(){
   }
 }
 
+function openSettings(){
+  window.open('./settings.html')
+}
+
+
+document.getElementById("opensettings").addEventListener("click", openSettings);
 document.getElementById("leave").addEventListener("click", leave);
 document.getElementById("stop").addEventListener("click", stop);
 document.getElementById("open-nav").addEventListener("click", openNav);
