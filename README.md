@@ -1,4 +1,3 @@
-
 # kahoot-gui
 A GUI for a simple Kahoot spammer. Not affiliated with Kahoot.
 
@@ -29,5 +28,6 @@ The console can be shown or hidden through the toggle show button.
 "show quiz infos" will open up a menu that will get populated with information about the quiz once it starts.
 
 "kill bot spawner" will stop bots from spawning 
-~~(useful if you accidently typed 10000 bots or something and your about to kill your internet but you still want to use my epic kahoot thing)~~
+
+"make all bots leave" makes all joined bots leave, stunning, i know.
 
