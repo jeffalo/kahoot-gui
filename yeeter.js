@@ -14,7 +14,6 @@ var questionAmount = document.getElementById('questionAmount');
 var currentQuestionWork = document.getElementById('currentQ');
 var botAmount = document.getElementById('botA');
 
-var settingsWindow = null;
 
 function stop() {
   toldtostop = true;
@@ -46,10 +45,9 @@ async function leave(){
 }
 
 function openSettings(){
-  settingsWindow = window.open('./settings.html');
+  //show settings div
+  //scroll down to it
 }
-
-
 
 document.getElementById("opensettings").addEventListener("click", openSettings);
 document.getElementById("leave").addEventListener("click", leave);
@@ -84,7 +82,15 @@ document.getElementById('todoForm').addEventListener('submit', (evt) => {
   status('recived instructions for bots');
 });
 
+document.getElementById('settingsForm').addEventListener('submit', (evt) => {
+  // prevent default refresh functionality of forms
+  evt.preventDefault();
 
+  // get input on the form and somehow send it to the yeeter.js script
+
+  //close
+  window.close()
+});
 
 
 function timer(pin, name, amountb, sped) {
