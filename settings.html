@@ -16,26 +16,27 @@
 <body>
 
   <h1>Advanced Settings (WIP DOESN'T WORK)</h1>
-  <h2>names:</h2>
-        <form id="namesForm">
+        <form id="settingsForm">
           <div class="form-group">
+			<h2>names:</h2>
             <label class="form-label" type="text" for="add-input">[prefix]+[number]:</label>
             <input required class="radio" type="radio" name="add-input">
             <br>
             <label required class="form-label" for="add-input">[number]+[suffix]:</label>
             <input required class="radio" type="radio" name="add-input">
             <br>
-            <label required class="form-label" for="add-input">From list:</label>
+            <label required class="form-label" for="add-input">From list below:</label>
             <input required class="radio" type="radio" name="add-input">
             <br>
+            <label class="form-label" type="text" for="add-input">Names (seperate by newline):</label>
+			<textarea></textarea>
           </div>
+		  <div class="form-group">
+		    <h2>fun:</h2>
+			<!-- fun could not be found -->
+		  </div>
+		  <button id="formsave" class="btn">save</button>
         </form>
-  <h2>fun extras:</h2>
-  <h3>hydra</h3>
-  <p>joins 2 bots for every 1 disconnected</p>
-  <h3>stealth mode</h3>
-  <p>use keyboard combos to show and hide the yeeter and kahoot</p>
-  <button id="save" class="btn">save</button>
   <script src="./yeeter.js"></script>
   <script>
     var __1 = require("custom-electron-titlebar");
@@ -44,5 +45,6 @@
       icon: './logo.png',
       shadow: true
     });
+	status('test')
   </script>
 </body>

@@ -14,6 +14,8 @@ var questionAmount = document.getElementById('questionAmount');
 var currentQuestionWork = document.getElementById('currentQ');
 var botAmount = document.getElementById('botA');
 
+var settingsWindow = null;
+
 function stop() {
   toldtostop = true;
   status('bot spawner murdered; a grand total of ' + variable + ' bots joined, however a couple more might have slipped through.');
@@ -44,7 +46,11 @@ async function leave(){
 }
 
 function openSettings(){
-  window.open('./settings.html')
+  settingsWindow = window.open('./settings.html');
+}
+
+function getSettingsData(){
+  //do stuff
 }
 
 
@@ -80,6 +86,18 @@ document.getElementById('todoForm').addEventListener('submit', (evt) => {
   timer(pin, botName, amountworkplease, speed);
   status('recived instructions for bots');
 });
+
+
+document.getElementById('settingsForm').addEventListener('submit', (evt) => {
+  // prevent default refresh functionality of forms
+  evt.preventDefault();
+
+  // get input on the form
+
+  //close
+  settingsWindow.close()
+});
+
 
 function timer(pin, name, amountb, sped) {
   variable = 0;
