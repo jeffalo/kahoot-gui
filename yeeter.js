@@ -49,9 +49,6 @@ function openSettings(){
   settingsWindow = window.open('./settings.html');
 }
 
-function getSettingsData(){
-  //do stuff
-}
 
 
 document.getElementById("opensettings").addEventListener("click", openSettings);
@@ -88,15 +85,6 @@ document.getElementById('todoForm').addEventListener('submit', (evt) => {
 });
 
 
-document.getElementById('settingsForm').addEventListener('submit', (evt) => {
-  // prevent default refresh functionality of forms
-  evt.preventDefault();
-
-  // get input on the form
-
-  //close
-  settingsWindow.close()
-});
 
 
 function timer(pin, name, amountb, sped) {
