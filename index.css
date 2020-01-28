@@ -40,13 +40,9 @@ body {
 }
 
 
-.input {
-  margin: 10px 0;
-  position: relative;
-  width: 300px;
-}
 
-input {
+
+.form-input {
   background: transparent;
   border: none;
   border-bottom: solid 1px #ccc;
@@ -70,7 +66,7 @@ input::placeholder {
 
 input:focus,
 input:not(:placeholder-shown) {
-  border-bottom: solid 1px #4476bd;
+  border-bottom: solid 1px #7E48BD;
   outline: none;
 }
 
