@@ -31,10 +31,10 @@ function closeNav() {
 
 function toggleShow() {
   var x = document.getElementById("status");
-  if (x.className === "console") {
-    x.className = "console hidden";
+  if (x.style.display === "none") {
+    x.style.display = "block";
   } else {
-    x.className = "console";
+    x.style.display = "none";
   }
 }
 
@@ -45,8 +45,12 @@ async function leave(){
 }
 
 function openSettings(){
-  //show settings div
-  //scroll down to it
+  var x = document.getElementById("settings");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
 
 document.getElementById("opensettings").addEventListener("click", openSettings);
@@ -86,10 +90,10 @@ document.getElementById('settingsForm').addEventListener('submit', (evt) => {
   // prevent default refresh functionality of forms
   evt.preventDefault();
 
-  // get input on the form and somehow send it to the yeeter.js script
-
-  //close
-  window.close()
+  console.log(evt.target[0].checked);
+  console.log(evt.target[1].checked);
+  console.log(evt.target[2].checked);
+//unfinished code TODO, take the values of these and put them in use for when the user presses yeet and earlier on in the code where they join hopefully that makes sense
 });
 
 
