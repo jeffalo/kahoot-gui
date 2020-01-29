@@ -1,45 +1,46 @@
 var Kahoot = require("kahoot.js-updated");
 var clients = [];
-var botCount = 0;
-var gamePin = null;
-var botName = "Something Broke";
-var botJoinSpeed = "100";
-var botsToJoin = 100; //amount of bots that join (dont do more than 2000)
-var stopBots = false;
-
+var n = 0;
+var variable = 0;
+var pin = null;
+var botName = 'Something Broke';
+var speed = '100';
+var amountworkplease = 100; //amount of bots that join (dont do more than 2000)
 var currentStatus = "\n" + document.getElementById("status").innerHTML;
-var quizName = document.getElementById("quiz-name");
-var questionsAmount = document.getElementById("questions-amount");
-var currentQuestionWork = document.getElementById("current-question");
+var toldtostop = false;
+
+var quizName = document.getElementById('quizName');
+var questionAmount = document.getElementById('questionAmount');
+var currentQuestionWork = document.getElementById('currentQ');
+var botAmount = document.getElementById('botA');
 
 
 function stop() {
-  stopBots = true;
-  status(
-    "bot spawner murdered; a grand total of " +
-      botCount +
-      " bots joined, however a couple more might have slipped through."
-  );
+  toldtostop = true;
+  status('bot spawner murdered; a grand total of ' + variable + ' bots joined, however a couple more might have slipped through.');
 }
 
+
 function openNav() {
-  document.getElementById("my-sidenav").style.width = "250px";
+  document.getElementById("mySidenav").style.width = "250px";
 }
 
 function closeNav() {
-  document.getElementById("my-sidenav").style.width = "0";
+  document.getElementById("mySidenav").style.width = "0";
 }
 
 function toggleShow() {
   var x = document.getElementById("status");
-  x.style.display === "none"
-    ? (x.style.display = "block")
-    : (x.style.display = "none");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
 
-async function leave() {
+async function leave(){
   for (client in clients) {
-    await client.leave(); //.then(status("Bot left"));
+    await clients[client].leave()
   }
 }
 
@@ -52,48 +53,39 @@ function openSettings(){
   }
 }
 
-document.getElementById("settings-btn").addEventListener("click", openSettings);
-document.getElementById("leave-btn").addEventListener("click", leave);
-document.getElementById("stop-btn").addEventListener("click", stop);
-document.getElementById("open-nav-btn").addEventListener("click", openNav);
-document.getElementById("close-nav-btn").addEventListener("click", closeNav);
-document
-  .getElementById("toggle-show-btn")
-  .addEventListener("click", toggleShow);
-
+document.getElementById("opensettings").addEventListener("click", openSettings);
+document.getElementById("leave").addEventListener("click", leave);
+document.getElementById("stop").addEventListener("click", stop);
+document.getElementById("open-nav").addEventListener("click", openNav);
+document.getElementById("close-nav").addEventListener("click", closeNav);
+document.getElementById("toggle-show").addEventListener("click", toggleShow);
 
 function status(update) {
   currentStatus = "\n" + document.getElementById("status").innerHTML;
-  document.getElementById("status").innerHTML = latestStatus + currentStatus;
+  document.getElementById("status").innerHTML = update + currentStatus;
 }
 
 status("No bots currently; no kahoots yeeted.");
 
-document.getElementById("todoForm").addEventListener("submit", evt => {
+document.getElementById('todoForm').addEventListener('submit', (evt) => {
   // prevent default refresh functionality of forms
   evt.preventDefault();
 
   // input on the form
-  botName = evt.target[0].value;
-  gamePin = evt.target[1].value;
-  botsToJoin = evt.target[2].value;
-  botJoinSpeed = evt.target[3].value;
+  const name = evt.target[0];
+  const pinthing = evt.target[1];
+  const amnt = evt.target[2];
+  const lgtnmqen = evt.target[3];
+  botName = name.value;
+  pin = pinthing.value;
+  amountworkplease = amnt.value;
+  speed = lgtnmqen.value;
   console.log(botName);
-  timer(gamePin, botName, botsToJoin, botJoinSpeed);
-  status("recived instructions for bots");
+  toldtostop = false;
+  timer(pin, botName, amountworkplease, speed);
+  status('recived instructions for bots');
 });
 
-function timer(gamePin, botName, botsToJoin, botJoinSpeed) {
-  botCount = 0;
-  var joinTimer = setInterval(function() {
-    console.log(++botCount);
-    status(
-      "Bot (" + botName + " " + botCount + ") recived instructions to join."
-    );
-    if (botCount >= botsToJoin || stopBots == true) clearInterval(joinTimer);
-    joinKahoot(gamePin, botName);
-  }, botJoinSpeed); //speed goes here please don't do less than 75
-  
 document.getElementById('settingsForm').addEventListener('submit', (evt) => {
   // prevent default refresh functionality of forms
   evt.preventDefault();
@@ -104,38 +96,48 @@ document.getElementById('settingsForm').addEventListener('submit', (evt) => {
 //unfinished code TODO, take the values of these and put them in use for when the user presses yeet and earlier on in the code where they join hopefully that makes sense
 });
 
+
+function timer(pin, name, amountb, sped) {
+  variable = 0;
+  var timer = setInterval(function() {
+    console.log(++variable);
+    status("Bot (" + name + " " + variable + ") recived instructions to join.");
+    if (variable >= amountb || toldtostop == true) clearInterval(timer);
+    joinKahoot(pin, name);
+  }, sped); //speed goes here please don't do less than 75
 }
 
-function joinKahoot(gamePin, botName) {
-  const client = new Kahoot();
+function joinKahoot(pin, name) {
+  const client = new Kahoot;
   client.setMaxListeners(Number.POSITIVE_INFINITY);
-  client.join(gamePin /* Or any other kahoot game pin */, botName + botCount);
+  client.join(pin /* Or any other kahoot game pin */ , name + variable);
   client.on("joined", () => {
-    //status("Bot ("+botName+" "+botCount+") joined.");
+    //status("Bot ("+name+" "+variable+") joined.");
   });
-  var botID = botCount;
-  client.on("quizStart", quiz => {
-    status("[" + botName + botID + "] Quiz has started!");
-    quizName.innerHTML = quiz.name;
-    questionsAmount.innerHTML = quiz.questionCount + " questions";
-    currentQuestionWork.innerHTML = "no questions yet";
+  var myID = variable;
+  client.on("quizStart", Quiz => {
+    status("[" + name + myID + "] Quiz has started!");
+    quizName.innerHTML = Quiz.name;
+    questionAmount.innerHTML = Quiz.questionCount + " questions";
+    currentQuestionWork.innerHTML = 'no questions yet';
   });
   client.on("questionStart", question => {
-    var answ = Math.floor(Math.random() * 4);
-    status("[" + botName + botID + "] answering opt" + answ);
+    var answ = Math.floor(Math.random() * Math.floor(4));
+    status("[" + name + myID + "] answering opt" + answ);
     question.answer(answ);
   });
+
   client.on("question", currentQuestion => {
     currentQuestionWork.innerHTML = "question#" + currentQuestion.number;
   });
   client.on("questionEnd", question => {
-    status("[" + botName + botID + "] correct?=" + question.correct);
+    status("[" + name + myID + "] correct?=" + question.correct);
   });
   client.on("quizEnd", () => {
-    status("[" + botName + botID + "] quiz ended");
+    status("[" + name + myID + "] quiz ended");
   });
   client.on("disconnect", () => {
-    status("[" + botName + botID + "] disconnected");
+    status("[" + name + myID + "] disconnected");
   });
 
   clients.push(client);
