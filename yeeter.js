@@ -12,9 +12,6 @@ var quizName = document.getElementById("quiz-name");
 var questionsAmount = document.getElementById("questions-amount");
 var currentQuestionWork = document.getElementById("current-question");
 
-// Vars currently not used
-var botAmount = document.getElementById("bot-amount");
-var settingsWindow = null;
 
 function stop() {
   stopBots = true;
@@ -35,9 +32,9 @@ function closeNav() {
 
 function toggleShow() {
   var x = document.getElementById("status");
-  x.className === "console"
-    ? (x.className = "console hidden")
-    : (x.className = "console");
+  x.style.display === "none"
+    ? (x.style.display = "block")
+    : (x.style.display = "none");
 }
 
 async function leave() {
@@ -46,8 +43,13 @@ async function leave() {
   }
 }
 
-function openSettings() {
-  settingsWindow = window.open("./settings.html");
+function openSettings(){
+  var x = document.getElementById("settings");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
 
 document.getElementById("settings-btn").addEventListener("click", openSettings);
@@ -59,7 +61,8 @@ document
   .getElementById("toggle-show-btn")
   .addEventListener("click", toggleShow);
 
-function status(latestStatus) {
+
+function status(update) {
   currentStatus = "\n" + document.getElementById("status").innerHTML;
   document.getElementById("status").innerHTML = latestStatus + currentStatus;
 }
@@ -90,6 +93,17 @@ function timer(gamePin, botName, botsToJoin, botJoinSpeed) {
     if (botCount >= botsToJoin || stopBots == true) clearInterval(joinTimer);
     joinKahoot(gamePin, botName);
   }, botJoinSpeed); //speed goes here please don't do less than 75
+  
+document.getElementById('settingsForm').addEventListener('submit', (evt) => {
+  // prevent default refresh functionality of forms
+  evt.preventDefault();
+
+  console.log(evt.target[0].checked);
+  console.log(evt.target[1].checked);
+  console.log(evt.target[2].checked);
+//unfinished code TODO, take the values of these and put them in use for when the user presses yeet and earlier on in the code where they join hopefully that makes sense
+});
+
 }
 
 function joinKahoot(gamePin, botName) {

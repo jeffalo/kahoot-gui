@@ -43,6 +43,7 @@
   </div>
   <br>
   <button id="settings-btn" class="btn">open advanced settings window (before yeet)</button>
+
   <br>
   <div>
     <br>
@@ -58,7 +59,7 @@
 
     <br><br>
 
-    <textarea class="console" id="status" rows="10" cols="90" readonly>
+    <textarea style="display: none;" class="console" id="status" rows="10" cols="90" readonly>
 Kahoot Yeeter program started.
 </textarea>
   </div>
@@ -72,6 +73,35 @@ Kahoot Yeeter program started.
     <a id="bot-amount" href="#">unknown</a>
   </div>
 
+  <br>
+  <hr>
+  <br>
+  
+  <div style="display: none;" class="settings" id="settings">
+    <h1>advanced settings (WIP)</h1>
+        <form id="settingsForm">
+          <div class="form-group">
+			<h2>names:</h2>
+            <label class="form-label" type="text" for="add-input">[prefix]+[number]:</label>
+            <input required class="radio" type="radio" name="add-input">
+            <br>
+            <label required class="form-label" for="add-input">[number]+[suffix]:</label>
+            <input required class="radio" type="radio" name="add-input">
+            <br>
+            <label required class="form-label" for="add-input">From list below:</label>
+            <input required class="radio" type="radio" name="add-input">
+            <br>
+            <label class="form-label" type="text" for="add-input">Names (seperate by newline):</label>
+			<textarea></textarea>
+          </div>
+		  <div class="form-group">
+		    <h2>fun:</h2>
+			<!-- fun could not be found -->	
+		  </div>
+		  <button id="formsave" class="btn">save</button>
+        </form>
+  </div>
+  
   <script src="./yeeter.js"></script>
   <script>
     var __1 = require("custom-electron-titlebar");
@@ -81,6 +111,8 @@ Kahoot Yeeter program started.
       shadow: true
     });
   </script>
+  
+
 </body>
 
 </html>
