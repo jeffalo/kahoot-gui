@@ -169,7 +169,7 @@ function timer(pin, name, amountb, sped) {
 function joinKahoot(pin, name) {
   const client = new Kahoot();
   client.setMaxListeners(Number.POSITIVE_INFINITY);
-  client.join(pin /* Or any other kahoot game pin */, name + variable);
+  client.join(pin /* Or any other kahoot game pin */, name);
   client.on("joined", () => {
     //status("Bot ("+name+" "+variable+") joined.");
   });
