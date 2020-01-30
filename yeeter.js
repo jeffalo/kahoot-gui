@@ -3,23 +3,25 @@ var clients = [];
 var n = 0;
 var variable = 0;
 var pin = null;
-var botName = 'Something Broke';
-var speed = '100';
+var botName = "Something Broke";
+var speed = "100";
 var amountworkplease = 100; //amount of bots that join (dont do more than 2000)
 var currentStatus = "\n" + document.getElementById("status").innerHTML;
 var toldtostop = false;
-
-var quizName = document.getElementById('quizName');
-var questionAmount = document.getElementById('questionAmount');
-var currentQuestionWork = document.getElementById('currentQ');
-var botAmount = document.getElementById('botA');
-
+var selectedOption = null;
+var quizName = document.getElementById("quizName");
+var questionAmount = document.getElementById("questionAmount");
+var currentQuestionWork = document.getElementById("currentQ");
+var botAmount = document.getElementById("botA");
 
 function stop() {
   toldtostop = true;
-  status('bot spawner murdered; a grand total of ' + variable + ' bots joined, however a couple more might have slipped through.');
+  status(
+    "bot spawner murdered; a grand total of " +
+      variable +
+      " bots joined, however a couple more might have slipped through."
+  );
 }
-
 
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
@@ -38,13 +40,13 @@ function toggleShow() {
   }
 }
 
-async function leave(){
+async function leave() {
   for (client in clients) {
-    await clients[client].leave()
+    await clients[client].leave();
   }
 }
 
-function openSettings(){
+function openSettings() {
   var x = document.getElementById("settings");
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -67,7 +69,7 @@ function status(update) {
 
 status("No bots currently; no kahoots yeeted.");
 
-document.getElementById('todoForm').addEventListener('submit', (evt) => {
+document.getElementById("todoForm").addEventListener("submit", evt => {
   // prevent default refresh functionality of forms
   evt.preventDefault();
 
@@ -83,34 +85,76 @@ document.getElementById('todoForm').addEventListener('submit', (evt) => {
   console.log(botName);
   toldtostop = false;
   timer(pin, botName, amountworkplease, speed);
-  status('recived instructions for bots');
+  status("recived instructions for bots");
 });
 
-document.getElementById('settingsForm').addEventListener('submit', (evt) => {
+function disableNameInput() {
+  let nameInput = document.getElementById("name-input");
+  nameInput.value =
+    "You chose to enter a list of names. You can leave this blank.";
+  nameInput.disabled = true;
+}
+
+document.getElementById("settingsForm").addEventListener("submit", evt => {
   // prevent default refresh functionality of forms
   evt.preventDefault();
 
+  selectedOption = document.querySelector("input[name=add-input]:checked").id;
+  if (evt.target[2].checked) {
+    disableNameInput();
+  }
   console.log(evt.target[0].checked);
   console.log(evt.target[1].checked);
   console.log(evt.target[2].checked);
-//unfinished code TODO, take the values of these and put them in use for when the user presses yeet and earlier on in the code where they join hopefully that makes sense
+  //unfinished code TODO, take the values of these and put them in use for when the user presses yeet and earlier on in the code where they join hopefully that makes sense
 });
 
+function chooseBotNamingOption(name, variable) {
+  // See which input is checked and then choose the corresponding bot naming procedure
+  if (selectedOption == "prefix-number" || selectedOption == null) {
+    let bot = simpleBotName(name, variable);
+    return bot;
+  } else if (selectedOption == "number-suffix") {
+    let bot = simpleBotName(variable, name);
+    return bot;
+  } else {
+    let bot = botNameFromList(variable - 1);
+    return bot;
+  }
+}
+
+function simpleBotName(prefix, suffix) {
+  // Add prefix + name or suffix + name
+  return prefix + suffix;
+}
+
+function botNameFromList(variable) {
+  // Take the value of the textarea, convert to array of string,
+  // and then return names in order
+  // I made it so the names will loop if the bot amount specified is bigger than the list size,
+  // maybe you want to change that so only the amount of bots one specified names for should join
+  var botNameList = document.getElementById("bot-name-list").value;
+  botNameList = botNameList.split("\n");
+  return botNameList[variable % botNameList.length];
+}
 
 function timer(pin, name, amountb, sped) {
   variable = 0;
   var timer = setInterval(function() {
     console.log(++variable);
-    status("Bot (" + name + " " + variable + ") recived instructions to join.");
+    // call the function to get the bot name, and use it
+    let botName = chooseBotNamingOption(name, variable);
+    status(botName);
+    status("Bot (" + botName + ") recived instructions to join.");
     if (variable >= amountb || toldtostop == true) clearInterval(timer);
-    joinKahoot(pin, name);
+    joinKahoot(pin, botName);
   }, sped); //speed goes here please don't do less than 75
 }
 
 function joinKahoot(pin, name) {
-  const client = new Kahoot;
+  const client = new Kahoot();
   client.setMaxListeners(Number.POSITIVE_INFINITY);
-  client.join(pin /* Or any other kahoot game pin */ , name + variable);
+  client.join(pin /* Or any other kahoot game pin */, name + variable);
   client.on("joined", () => {
     //status("Bot ("+name+" "+variable+") joined.");
   });
@@ -119,7 +163,7 @@ function joinKahoot(pin, name) {
     status("[" + name + myID + "] Quiz has started!");
     quizName.innerHTML = Quiz.name;
     questionAmount.innerHTML = Quiz.questionCount + " questions";
-    currentQuestionWork.innerHTML = 'no questions yet';
+    currentQuestionWork.innerHTML = "no questions yet";
   });
   client.on("questionStart", question => {
     var answ = Math.floor(Math.random() * Math.floor(4));
