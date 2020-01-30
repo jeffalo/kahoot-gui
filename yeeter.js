@@ -156,7 +156,12 @@ function timer(pin, name, amountb, sped) {
     variable == 0 ? (times += 1) : (times = times);
     console.log(++variable);
     // Do the check before the join function so that it stops at the right moment
-    if (times > amountb || variable - 1 >= amountb || toldtostop == true) {
+    if (selectedOption == "name-list") {
+      if (times > amountb || toldtostop == true) {
+        clearInterval(timer);
+        return;
+      }
+    } else if (variable - 1 >= amountb) {
       clearInterval(timer);
       return;
     }
