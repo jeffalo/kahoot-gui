@@ -23,7 +23,7 @@
         <form id="todoForm">
           <div class="form-group">
             <label class="form-label" type="text" for="add-input">name:</label>
-            <input required class="form-input" type="text" name="add-input" placeholder="yeet epic man">
+            <input id="name-input" required class="form-input" type="text" name="add-input" placeholder="yeet epic man">
             <br>
             <label required class="form-label" for="add-input">pin:</label>
             <input required class="form-input" type="number" name="add-input" placeholder="3481551">
@@ -82,16 +82,16 @@ Kahoot Yeeter program started.
           <div class="form-group">
 			<h2>names:</h2>
             <label class="form-label" type="text" for="add-input">[prefix]+[number]:</label>
-            <input required class="radio" type="radio" name="add-input">
+            <input id="prefix-number" required class="radio" type="radio" name="add-input">
             <br>
             <label required class="form-label" for="add-input">[number]+[suffix]:</label>
-            <input required class="radio" type="radio" name="add-input">
+            <input id="number-suffix" required class="radio" type="radio" name="add-input">
             <br>
             <label required class="form-label" for="add-input">From list below:</label>
-            <input required class="radio" type="radio" name="add-input">
+            <input id="name-list" required class="radio" type="radio" name="add-input">
             <br>
             <label class="form-label" type="text" for="add-input">Names (seperate by newline):</label>
-			<textarea></textarea>
+			<textarea id="bot-name-list"></textarea>
           </div>
 		  <div class="form-group">
 		    <h2>fun:</h2>
