@@ -6,8 +6,7 @@
     "start": "electron ."
   },
   "devDependencies": {
-    "electron": "^7.1.10",
-    "eslint": "^6.8.0"
+    "electron": "^7.1.10"
   },
   "dependencies": {
     "custom-electron-titlebar": "^3.2.1",
