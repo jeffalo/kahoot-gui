@@ -53,8 +53,16 @@ function openSettings() {
   } else {
     x.style.display = "none";
   }
+  document.location.href = "#settings";
 }
 
+function scrollTop(){
+  var x = document.getElementById("settings");
+  x.style.display = "none";
+  document.location.href = "#top";
+}
+
+document.getElementById("formsave").addEventListener("click", scrollTop);
 document.getElementById("opensettings").addEventListener("click", openSettings);
 document.getElementById("leave").addEventListener("click", leave);
 document.getElementById("stop").addEventListener("click", stop);

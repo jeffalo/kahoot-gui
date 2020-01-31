@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    <div id="top"></div id="top">
     <div class="container">
       <div class="columns">
         <div class="column col-10">
@@ -119,7 +120,7 @@ Kahoot Yeeter program started.
     <br />
 
     <div style="display: none;" class="settings" id="settings">
-      <h1>advanced settings (WIP)</h1>
+      <h1>advanced settings</h1>
       <form id="settingsForm">
         <div class="form-group">
           <h2>names:</h2>
@@ -132,6 +133,7 @@ Kahoot Yeeter program started.
             class="radio"
             type="radio"
             name="add-input"
+            checked
           />
           <br />
           <label required class="form-label" for="add-input"
@@ -162,8 +164,8 @@ Kahoot Yeeter program started.
           <textarea id="bot-name-list"></textarea>
         </div>
         <div class="form-group">
-          <h2>fun:</h2>
-          <!-- fun could not be found -->
+          <!-- <h2>fun:</h2> -->
+          <!-- more advanced settings can go here -->
         </div>
         <button id="formsave" class="btn">save</button>
       </form>
@@ -178,5 +180,5 @@ Kahoot Yeeter program started.
         shadow: true
       });
     </script>
-  </body>
+  </body id="top">
 </html>
