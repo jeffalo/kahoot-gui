@@ -178,16 +178,15 @@ function joinKahoot(pin, name) {
   client.on("joined", () => {
     //status("Bot ("+name+" "+variable+") joined.");
   });
-  var myID = variable;
   client.on("quizStart", Quiz => {
-    status("[" + name + myID + "] Quiz has started!");
+    status("[" + name + "] Quiz has started!");
     quizName.innerHTML = Quiz.name;
     questionAmount.innerHTML = Quiz.questionCount + " questions";
     currentQuestionWork.innerHTML = "no questions yet";
   });
   client.on("questionStart", question => {
     var answ = Math.floor(Math.random() * Math.floor(4));
-    status("[" + name + myID + "] answering opt" + answ);
+    status("[" + name + "] answering opt" + answ);
     question.answer(answ);
   });
 
@@ -195,13 +194,13 @@ function joinKahoot(pin, name) {
     currentQuestionWork.innerHTML = "question#" + currentQuestion.number;
   });
   client.on("questionEnd", question => {
-    status("[" + name + myID + "] correct?=" + question.correct);
+    status("[" + name + "] correct?=" + question.correct);
   });
   client.on("quizEnd", () => {
-    status("[" + name + myID + "] quiz ended");
+    status("[" + name + "] quiz ended");
   });
   client.on("disconnect", () => {
-    status("[" + name + myID + "] disconnected");
+    status("[" + name + "] disconnected");
   });
 
   clients.push(client);
