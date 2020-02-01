@@ -43,7 +43,7 @@ Consult the tables below.
 
 | option | Meaning |
 |--|--|
-| [prefix]+[number] | Makes all bots join using the format (where prefix is the bot's name) |
-| [number]+[suffix] | Makes all bots join using the format (where prefix is the bot's name) |
+| prefix+number | Makes all bots join using the format (where prefix is the bot's name) |
+| number+suffix | Makes all bots join using the format (where prefix is the bot's name) |
 | from list | Disables the normal name input and all bots will join using a name from there. If the amount value is 1, then every bot on the list will join, if it's 2 every bot will join twice |
 | Save | saves |
