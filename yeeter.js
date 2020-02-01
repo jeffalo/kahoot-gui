@@ -62,6 +62,46 @@ function scrollTop(){
   document.location.href = "#top";
 }
 
+function inputNames(){
+  fetch('./names.txt')
+  .then(response => response.text())
+  .then((data) => {
+    document.getElementById("bot-name-list").value = data;
+  })
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+function random(){
+  var numbers = document.getElementById("bot-name-list").value.split("\n");
+  var shuffledNumbers = shuffle(numbers);
+  //var output = document.getElementById("output");
+  var output = "";
+  shuffledNumbers.forEach(function(currentNumber) {
+      output += currentNumber + "\n";
+  })
+  document.getElementById("bot-name-list").value = output
+}
+
+document.getElementById("rand").addEventListener("click", random);
+document.getElementById("inputNames").addEventListener("click", inputNames);
 document.getElementById("formsave").addEventListener("click", scrollTop);
 document.getElementById("opensettings").addEventListener("click", openSettings);
 document.getElementById("leave").addEventListener("click", leave);
