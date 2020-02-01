@@ -85,11 +85,11 @@ document.getElementById("todoForm").addEventListener("submit", evt => {
   const name = evt.target[0];
   const pinthing = evt.target[1];
   const amnt = evt.target[2];
-  const lgtnmqen = evt.target[3];
+  const earlyspeed = evt.target[3];
   botName = name.value;
   pin = pinthing.value;
   amountworkplease = amnt.value;
-  speed = lgtnmqen.value;
+  speed = earlyspeed.value;
   console.log(botName);
   toldtostop = false;
   timer(pin, botName, amountworkplease, speed);
