@@ -40,6 +40,7 @@ Consult the tables below.
 | make all bots leave | makes all the currently joined bots leave |
 
 ### Advanced settings
+
 | option | Meaning |
 |--|--|
 | [prefix]+[number] | Makes all bots join using the format (where prefix is the bot's name) |
