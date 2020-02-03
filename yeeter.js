@@ -1,24 +1,22 @@
 var Kahoot = require("kahoot.js-updated");
 var clients = [];
-var n = 0;
-var variable = 0;
-var pin = null;
+var currentBotCount = 0;
+var gamePin = null;
 var botName = "Something Broke";
-var speed = "100";
-var amountworkplease = 100; //amount of bots that join (dont do more than 2000)
+var joinSpeed = "100";
+var amountOfBotsToJoin = 100; //amount of bots that join (dont do more than 2000)
 var currentStatus = "\n" + document.getElementById("status").innerHTML;
-var toldtostop = false;
-var selectedOption = null;
+var toldToStop = false;
+var selectedBotNamingOption = null;
 var quizName = document.getElementById("quiz-name");
 var questionAmount = document.getElementById("question-amount");
-var currentQuestionWork = document.getElementById("current-question");
-var botAmount = document.getElementById("bot-amount");
+var currentQuestion = document.getElementById("current-question");
 
 function stop() {
-  toldtostop = true;
+  toldToStop = true;
   status(
     "bot spawner murdered; a grand total of " +
-      variable +
+      currentBotCount +
       " bots joined, however a couple more might have slipped through."
   );
 }
@@ -91,11 +89,11 @@ function shuffle(array) {
 }
 
 function random() {
-  var numbers = document.getElementById("bot-name-list").value.split("\n");
-  var shuffledNumbers = shuffle(numbers);
+  var botNames = document.getElementById("bot-name-list").value.split("\n");
+  var shuffledNames = shuffle(botNames);
   //var output = document.getElementById("output");
   var output = "";
-  shuffledNumbers.forEach(function(currentNumber) {
+  shuffledNames.forEach(function(currentNumber) {
     output += currentNumber + "\n";
   });
   document.getElementById("bot-name-list").value = output;
@@ -129,17 +127,12 @@ document.getElementById("todo-form").addEventListener("submit", evt => {
   evt.preventDefault();
 
   // input on the form
-  const name = evt.target[0];
-  const pinthing = evt.target[1];
-  const amnt = evt.target[2];
-  const earlyspeed = evt.target[3];
-  botName = name.value;
-  pin = pinthing.value;
-  amountworkplease = amnt.value;
-  speed = earlyspeed.value;
-  console.log(botName);
-  toldtostop = false;
-  timer(pin, botName, amountworkplease, speed);
+  botName = evt.target[0].value;
+  gamePin = evt.target[1].value;
+  amountOfBotsToJoin = evt.target[2].value;
+  joinSpeed = evt.target[3].value;
+  toldToStop = false;
+  timer(gamePin, botName, amountOfBotsToJoin, joinSpeed);
   status("recived instructions for bots");
 });
 
@@ -158,28 +151,30 @@ document.getElementById("settings-form").addEventListener("submit", evt => {
   evt.preventDefault();
 
   // If list naming option is selected disable name input
-  selectedOption = document.querySelector("input[name=add-input]:checked").id;
+  selectedBotNamingOption = document.querySelector(
+    "input[name=add-input]:checked"
+  ).id;
   if (evt.target[2].checked) {
     disableNameInput(true);
   } else {
     disableNameInput(false);
   }
-  console.log(evt.target[0].checked);
-  console.log(evt.target[1].checked);
-  console.log(evt.target[2].checked);
   //unfinished code TODO, take the values of these and put them in use for when the user presses yeet and earlier on in the code where they join hopefully that makes sense
 });
 
-function chooseBotNamingOption(name, variable, times) {
+function chooseBotNamingOption(name, currentBotCount, times) {
   // See which input is checked and then choose the corresponding bot naming procedure
-  if (selectedOption == "prefix-number" || selectedOption == null) {
-    let bot = simpleBotName(name, variable);
+  if (
+    selectedBotNamingOption == "prefix-number" ||
+    selectedBotNamingOption == null
+  ) {
+    let bot = simpleBotName(name, currentBotCount);
     return bot;
-  } else if (selectedOption == "number-suffix") {
-    let bot = simpleBotName(variable, name);
+  } else if (selectedBotNamingOption == "number-suffix") {
+    let bot = simpleBotName(currentBotCount, name);
     return bot;
   } else {
-    let bot = botNameFromList(variable - 1, times);
+    let bot = botNameFromList(currentBotCount - 1, times);
     return bot;
   }
 }
@@ -195,7 +190,9 @@ function botNameFromList(index, times) {
   // Will loop over the name as many times as requested in the "number of bots" field
   var botNameList = document.getElementById("bot-name-list").value;
   botNameList = botNameList.split("\n");
-  index >= botNameList.length - 1 ? (variable = 0) : (variable = variable);
+  index >= botNameList.length - 1
+    ? (currentBotCount = 0)
+    : (currentBotCount = currentBotCount);
   if (times > 1) {
     return botNameList[index] + times;
   } else {
@@ -203,41 +200,41 @@ function botNameFromList(index, times) {
   }
 }
 
-function timer(pin, name, amountb, sped) {
-  variable = 0;
-  // Added times variable to count how many times the program went over the specified list of names
+function timer(gamePin, name, numberOfBotsToJoin, joinSpeed) {
+  currentBotCount = 0;
+  // Added times currentBotCount to count how many times the program went over the specified list of names
   var times = 0;
   var timer = setInterval(function() {
-    variable == 0 ? (times += 1) : (times = times);
-    console.log(++variable);
+    currentBotCount == 0 ? (times += 1) : (times = times);
+    currentBotCount++;
     // Do the check before the join function so that it stops at the right moment
-    if (selectedOption == "name-list") {
-      if (times > amountb || toldtostop == true) {
+    if (selectedBotNamingOption == "name-list") {
+      if (times > numberOfBotsToJoin || toldToStop == true) {
         clearInterval(timer);
         return;
       }
-    } else if (variable - 1 >= amountb) {
+    } else if (currentBotCount - 1 >= numberOfBotsToJoin) {
       clearInterval(timer);
       return;
     }
-    let botName = chooseBotNamingOption(name, variable, times);
+    let botName = chooseBotNamingOption(name, currentBotCount, times);
     status("Bot (" + botName + ") recived instructions to join.");
-    joinKahoot(pin, botName);
-  }, sped); //speed goes here please don't do less than 75
+    joinKahoot(gamePin, botName);
+  }, joinSpeed); //joinSpeed goes here please don't do less than 75
 }
 
-function joinKahoot(pin, name) {
+function joinKahoot(gamePin, name) {
   const client = new Kahoot();
   client.setMaxListeners(Number.POSITIVE_INFINITY);
-  client.join(pin /* Or any other kahoot game pin */, name);
+  client.join(gamePin /* Or any other kahoot game gamePin */, name);
   client.on("joined", () => {
-    //status("Bot ("+name+" "+variable+") joined.");
+    //status("Bot ("+name+" "+currentBotCount+") joined.");
   });
   client.on("quizStart", Quiz => {
     status("[" + name + "] Quiz has started!");
     quizName.innerHTML = Quiz.name;
     questionAmount.innerHTML = Quiz.questionCount + " questions";
-    currentQuestionWork.innerHTML = "no questions yet";
+    currentQuestion.innerHTML = "no questions yet";
   });
   client.on("questionStart", question => {
     var answ = Math.floor(Math.random() * Math.floor(4));
@@ -246,7 +243,7 @@ function joinKahoot(pin, name) {
   });
 
   client.on("question", currentQuestion => {
-    currentQuestionWork.innerHTML = "question#" + currentQuestion.number;
+    currentQuestion.innerHTML = "question#" + currentQuestion.number;
   });
   client.on("questionEnd", question => {
     status("[" + name + "] correct?=" + question.correct);
