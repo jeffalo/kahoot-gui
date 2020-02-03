@@ -13,6 +13,7 @@ var questionAmount = document.getElementById("question-amount");
 var currentQuestion = document.getElementById("current-question");
 
 function stop() {
+  // Stops the bot joining process
   toldToStop = true;
   status(
     "bot spawner murdered; a grand total of " +
@@ -22,14 +23,17 @@ function stop() {
 }
 
 function openNav() {
+  // Displays the side navigation panel
   document.getElementById("sidenav").style.width = "250px";
 }
 
 function closeNav() {
+  // Closes the side navigation panel
   document.getElementById("sidenav").style.width = "0";
 }
 
 function toggleShow() {
+  // Displays/Hides the program status text area
   var x = document.getElementById("status");
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -39,12 +43,14 @@ function toggleShow() {
 }
 
 async function leave() {
+  // Make all bots leave the game instance
   for (client in clients) {
     await clients[client].leave();
   }
 }
 
 function openSettings() {
+  // Displays/Hides the advanced settings panel
   var x = document.getElementById("settings");
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -55,12 +61,15 @@ function openSettings() {
 }
 
 function scrollTop() {
+  // Scrolls to the top of the application
   var x = document.getElementById("settings");
   x.style.display = "none";
   document.location.href = "#top";
 }
 
 function inputNames() {
+  // Retrieves a list of generic names from the names.txt file and
+  // inputs the values retrieved in the bot names list in the advanced settings panel
   fetch("./names.txt")
     .then(response => response.text())
     .then(data => {
@@ -69,6 +78,7 @@ function inputNames() {
 }
 
 function shuffle(array) {
+  // Array shuffle function implementation
   var currentIndex = array.length,
     temporaryValue,
     randomIndex;
@@ -89,6 +99,7 @@ function shuffle(array) {
 }
 
 function random() {
+  // Shuffle the list of names from the bot names list
   var botNames = document.getElementById("bot-name-list").value.split("\n");
   var shuffledNames = shuffle(botNames);
   //var output = document.getElementById("output");
@@ -99,6 +110,7 @@ function random() {
   document.getElementById("bot-name-list").value = output;
 }
 
+// Add event listeners for different buttons
 document.getElementById("randomize-btn").addEventListener("click", random);
 document
   .getElementById("input-names-btn")
@@ -114,14 +126,6 @@ document.getElementById("close-nav-btn").addEventListener("click", closeNav);
 document
   .getElementById("toggle-show-btn")
   .addEventListener("click", toggleShow);
-
-function status(update) {
-  currentStatus = "\n" + document.getElementById("status").innerHTML;
-  document.getElementById("status").innerHTML = update + currentStatus;
-}
-
-status("No bots currently; no kahoots yeeted.");
-
 document.getElementById("todo-form").addEventListener("submit", evt => {
   // prevent default refresh functionality of forms
   evt.preventDefault();
@@ -136,6 +140,14 @@ document.getElementById("todo-form").addEventListener("submit", evt => {
   status("recived instructions for bots");
 });
 
+function status(update) {
+  // Update the status in the program status text area
+  currentStatus = "\n" + document.getElementById("status").innerHTML;
+  document.getElementById("status").innerHTML = update + currentStatus;
+}
+
+status("No bots currently; no kahoots yeeted.");
+
 function disableNameInput(disable) {
   // Disables or enables the name input
   let nameInput = document.getElementById("name-input");
@@ -147,7 +159,7 @@ function disableNameInput(disable) {
 }
 
 document.getElementById("settings-form").addEventListener("submit", evt => {
-  // prevent default refresh functionality of forms
+  // Prevent default refresh functionality of forms
   evt.preventDefault();
 
   // If list naming option is selected disable name input
