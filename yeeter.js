@@ -9,10 +9,10 @@ var amountworkplease = 100; //amount of bots that join (dont do more than 2000)
 var currentStatus = "\n" + document.getElementById("status").innerHTML;
 var toldtostop = false;
 var selectedOption = null;
-var quizName = document.getElementById("quizName");
-var questionAmount = document.getElementById("questionAmount");
-var currentQuestionWork = document.getElementById("currentQ");
-var botAmount = document.getElementById("botA");
+var quizName = document.getElementById("quiz-name");
+var questionAmount = document.getElementById("question-amount");
+var currentQuestionWork = document.getElementById("current-question");
+var botAmount = document.getElementById("bot-amount");
 
 function stop() {
   toldtostop = true;
@@ -24,11 +24,11 @@ function stop() {
 }
 
 function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("sidenav").style.width = "250px";
 }
 
 function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("sidenav").style.width = "0";
 }
 
 function toggleShow() {
@@ -56,26 +56,27 @@ function openSettings() {
   document.location.href = "#settings";
 }
 
-function scrollTop(){
+function scrollTop() {
   var x = document.getElementById("settings");
   x.style.display = "none";
   document.location.href = "#top";
 }
 
-function inputNames(){
-  fetch('./names.txt')
-  .then(response => response.text())
-  .then((data) => {
-    document.getElementById("bot-name-list").value = data;
-  })
+function inputNames() {
+  fetch("./names.txt")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("bot-name-list").value = data;
+    });
 }
 
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
-
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
@@ -89,26 +90,32 @@ function shuffle(array) {
   return array;
 }
 
-function random(){
+function random() {
   var numbers = document.getElementById("bot-name-list").value.split("\n");
   var shuffledNumbers = shuffle(numbers);
   //var output = document.getElementById("output");
   var output = "";
   shuffledNumbers.forEach(function(currentNumber) {
-      output += currentNumber + "\n";
-  })
-  document.getElementById("bot-name-list").value = output
+    output += currentNumber + "\n";
+  });
+  document.getElementById("bot-name-list").value = output;
 }
 
-document.getElementById("rand").addEventListener("click", random);
-document.getElementById("inputNames").addEventListener("click", inputNames);
-document.getElementById("formsave").addEventListener("click", scrollTop);
-document.getElementById("opensettings").addEventListener("click", openSettings);
-document.getElementById("leave").addEventListener("click", leave);
-document.getElementById("stop").addEventListener("click", stop);
-document.getElementById("open-nav").addEventListener("click", openNav);
-document.getElementById("close-nav").addEventListener("click", closeNav);
-document.getElementById("toggle-show").addEventListener("click", toggleShow);
+document.getElementById("randomize-btn").addEventListener("click", random);
+document
+  .getElementById("input-names-btn")
+  .addEventListener("click", inputNames);
+document.getElementById("save-form-btn").addEventListener("click", scrollTop);
+document
+  .getElementById("open-settings-btn")
+  .addEventListener("click", openSettings);
+document.getElementById("leave-btn").addEventListener("click", leave);
+document.getElementById("stop-btn").addEventListener("click", stop);
+document.getElementById("open-nav-btn").addEventListener("click", openNav);
+document.getElementById("close-nav-btn").addEventListener("click", closeNav);
+document
+  .getElementById("toggle-show-btn")
+  .addEventListener("click", toggleShow);
 
 function status(update) {
   currentStatus = "\n" + document.getElementById("status").innerHTML;
@@ -117,7 +124,7 @@ function status(update) {
 
 status("No bots currently; no kahoots yeeted.");
 
-document.getElementById("todoForm").addEventListener("submit", evt => {
+document.getElementById("todo-form").addEventListener("submit", evt => {
   // prevent default refresh functionality of forms
   evt.preventDefault();
 
@@ -146,7 +153,7 @@ function disableNameInput(disable) {
   nameInput.disabled = disable;
 }
 
-document.getElementById("settingsForm").addEventListener("submit", evt => {
+document.getElementById("settings-form").addEventListener("submit", evt => {
   // prevent default refresh functionality of forms
   evt.preventDefault();
 
