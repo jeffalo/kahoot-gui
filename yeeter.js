@@ -13,6 +13,8 @@ var selectedBotNamingOption = null;
 var quizName = document.getElementById("quiz-name");
 var questionAmount = document.getElementById("question-amount");
 var currentQuestion = document.getElementById("current-question");
+var useHydraMode = null;
+var hydraAmount = 0;
 
 function stop() {
   // Stops the bot joining process
@@ -126,6 +128,14 @@ function joinKahoot(gamePin, name) {
   });
   client.on("disconnect", () => {
     Functions.status("[" + name + "] disconnected");
+    if (useHydraMode == true){
+      var hydraCounter = 0
+      while (hydraCounter < hydraAmount){
+        joinKahoot(gamePin, name+"'s revenge"+hydraCounter)
+        hydraCounter++  
+      }
+
+    }
   });
 
   clients.push(client);
@@ -179,6 +189,14 @@ document.getElementById("settings-form").addEventListener("submit", evt => {
   } else {
     UserInterface.disableNameInput(false);
   }
-  //unfinished code TODO, take the values of these and put them in use for when the user presses yeet and earlier on in the code where they join hopefully that makes sense
+
+  console.log(evt.target[6].value)
+  if(evt.target[6].value == 0){
+    useHydraMode = false
+  } else{
+    useHydraMode = true
+    hydraAmount = evt.target[6].value
+  }
+  
 });
 Functions.status("No bots currently; no kahoots yeeted.");
