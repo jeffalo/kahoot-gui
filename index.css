@@ -95,10 +95,6 @@ input::-webkit-inner-spin-button {
   transition: visibility 0s 0.1s, opacity 0.1s linear;
 }
 
-.visible>div,
-.hidden>div {
-  /* Put any padding, border, min-height, etc. here. */
-}
 
 .hidden>div {
   margin-top: -10000px;
